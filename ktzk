@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# From https://github.com/ajalt/clikt/blob/master/runsample
+
+./gradlew --quiet ":ktzk-cli:installDist" && "./ktzk-cli/build/install/ktzk-cli/bin/ktzk-cli" "$@"
