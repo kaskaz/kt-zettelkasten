@@ -13,6 +13,11 @@ class ZettelBuilder {
     var content: Content? = null
     var footer: Footer? = null
 
+    fun withAddress(address: Address) = apply{ this.address = address }
+    fun withHeader(header: Header) = apply { this.header = header }
+    fun withContent(content: Content) = apply { this.content = content }
+    fun withFooter(footer: Footer) = apply { this.footer = footer }
+
     fun build(): Zettel {
         val now = OffsetDateTime.now()
         return Zettel(
@@ -51,6 +56,11 @@ class HeaderBuilder {
     var createdAt: OffsetDateTime? = null
     var updatedAt: OffsetDateTime? = null
 
+    fun withTitle(title: String) = apply { this.title = title }
+    fun withTags(tags: Set<Tag>) = apply { this.tags = tags }
+    fun withCreatedAt(createdAt: OffsetDateTime) = apply { this.createdAt = createdAt }
+    fun withUpdatedAt(updatedAt: OffsetDateTime) = apply { this.updatedAt = updatedAt }
+
     fun build(): Header {
         val now = OffsetDateTime.of(LocalDateTime.now(), ZoneOffset.UTC)
         return Header(
@@ -65,10 +75,16 @@ class HeaderBuilder {
 
 class ContentBuilder {
     var hypertext: String?  = null
+
+    fun withHypertext(hypertext: String) = apply { this.hypertext = hypertext }
+
     fun build(): Content = Content(hypertext ?: "")
 }
 
 class FooterBuilder {
     var references: List<Reference>? = null
+
+    fun withReferences(references: List<Reference>) = apply { this.references = references }
+
     fun build(): Footer = Footer(references ?: emptyList())
 }

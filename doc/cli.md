@@ -3,6 +3,7 @@
 ## The command-line interface
 
 ### Commands
+
 * ___new [--name | -n] [--tag | -t]___
 
     options:
@@ -25,10 +26,21 @@
     * id
     
 * ___list [--last]___
+    
+#### Support libraries
+     
+     * https://github.com/leprosus/kotlin-cli
+     * https://github.com/Kotlin/kotlinx-cli
+     * https://github.com/remkop/picocli
+     * https://github.com/ajalt/clikt
 
-## Support libraries
 
-* https://github.com/leprosus/kotlin-cli
-* https://github.com/Kotlin/kotlinx-cli
-* https://github.com/remkop/picocli
-* https://github.com/ajalt/clikt
+### Folder repository
+
+#### Filename
+> \<zettel id>--\<zettel title>
+>
+> Example: 20211001141510--My-First-Zettel
+
+
+

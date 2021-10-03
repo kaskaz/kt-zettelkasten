@@ -14,17 +14,25 @@ class Create(private val zettelRepository: ZettelRepository) {
         references: List<Reference>
     ): Zettel {
         val zettel = zettel {
-            address { withValidAddress() }
-            header {
-                title
-                tags
-            }
-            content {
-                hypertext
-            }
-            footer {
-                references
-            }
+            withAddress (
+                address { withValidAddress() }
+            )
+            withHeader(
+                header {
+                    withTitle(title)
+                    withTags(tags)
+                }
+            )
+            withContent(
+                content {
+                    withHypertext(hypertext)
+                }
+            )
+            withFooter(
+                footer {
+                    withReferences(references)
+                }
+            )
         }
         zettelRepository.create(zettel)
         return zettel
