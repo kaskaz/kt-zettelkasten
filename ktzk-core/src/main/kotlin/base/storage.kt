@@ -7,15 +7,13 @@ interface ZettelRepository {
     fun delete(address: Address)
 }
 
-class ZettelRepositoryException(message: String) : Exception(message)
-
 object InMemoryZettelRepository : ZettelRepository {
 
     private val mapOfZettels = mutableMapOf<String, Zettel>()
 
     override fun create(zettel: Zettel) {
         if(exists(zettel.address))
-            throw ZettelRepositoryException("Zettel with address ${zettel.address.identifier} already exists.")
+            throw ZettelAlreadyExistsException(zettel.address)
         addOrReplace(zettel)
     }
 
@@ -36,7 +34,7 @@ object InMemoryZettelRepository : ZettelRepository {
 
     private fun notExistsOrThrow(address: Address) {
         if(!exists(address)) {
-            throw ZettelRepositoryException("Zettel with address ${address.identifier} does not exists.")
+            throw ZettelNotFoundException(address)
         }
     }
 

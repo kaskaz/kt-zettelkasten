@@ -15,7 +15,7 @@ class Create(private val zettelRepository: ZettelRepository) {
     ): Zettel {
         val zettel = zettel {
             withAddress (
-                address { withValidAddress() }
+                address { withValidIdentifier() }
             )
             withHeader(
                 header {
@@ -58,8 +58,8 @@ class Update(private val zettelRepository: ZettelRepository) {
 }
 
 class Delete(private val zettelRepository: ZettelRepository) {
-    fun delete(zettel: Zettel) {
-        zettelRepository.delete(zettel.address)
+    fun delete(address: Address) {
+        zettelRepository.delete(address)
     }
 }
 

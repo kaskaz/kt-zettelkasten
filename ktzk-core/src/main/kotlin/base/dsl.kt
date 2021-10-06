@@ -4,7 +4,7 @@ fun zettel(init: ZettelBuilder.() -> Unit): Zettel = ZettelBuilder().apply(init)
 
 fun address(init: AddressBuilder.() -> Unit): Address = AddressBuilder().apply(init).build()
 
-fun AddressBuilder.asInvalid() = this.withInvalidAddress()
+fun AddressBuilder.asInvalid() = this.withInvalidIdentifier()
 
 fun header(init: HeaderBuilder.() -> Unit): Header = HeaderBuilder().apply(init).build()
 

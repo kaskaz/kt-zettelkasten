@@ -21,7 +21,7 @@ class ZettelBuilder {
     fun build(): Zettel {
         val now = OffsetDateTime.now()
         return Zettel(
-            address ?: AddressBuilder().withValidAddress().build(),
+            address ?: AddressBuilder().withValidIdentifier().build(),
             header ?: Header("", emptySet(), now, now),
             content ?: Content(""),
             footer ?: Footer(emptyList())
@@ -33,18 +33,20 @@ class AddressBuilder {
 
     var identifier: String? = null
 
+    fun withIdentifier(identifier: String) = apply { this.identifier = identifier }
+
     /**
      * Can be used to generate a new and valid address
      */
-    fun withValidAddress() = apply { identifier = OffsetDateTime.of(LocalDateTime.now(), ZoneOffset.UTC).toZettelAddress() }
+    fun withValidIdentifier() = apply { identifier = OffsetDateTime.of(LocalDateTime.now(), ZoneOffset.UTC).toZettelAddress() }
 
     /**
      * Assumes an invalid pattern
      */
-    fun withInvalidAddress() = apply { identifier = UUID.randomUUID().toString() }
+    fun withInvalidIdentifier() = apply { identifier = UUID.randomUUID().toString() }
 
     fun build(): Address {
-        if (identifier == null) withValidAddress()
+        if (identifier == null) withValidIdentifier()
         return Address(identifier!!)
     }
 }
