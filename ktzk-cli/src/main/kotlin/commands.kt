@@ -10,33 +10,6 @@ import com.github.ajalt.clikt.parameters.options.multiple
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 
-class KtzkCli : CliktCommand(name = "ktzk") {
-    override fun run() = Unit
-}
-
-class Create : CliktCommand(help = "Creates a new zettel") {
-    private val name by option(
-        "-n", "--name",
-        help = "Zettel's title"
-    ).required()
-
-    private val tags by option(
-        "-t", "--tag",
-        help = "Keyword that describes zettel"
-    ).multiple()
-
-    override fun run() {
-        val zettel = Create(FolderRepository)
-            .execute(
-                title = name,
-                tags = tags.map { Tag(it) }.toSet(),
-                hypertext = "",
-                references = emptyList()
-            )
-        echo("created a new zettel with id ${zettel.address.identifier}")
-    }
-}
-
 class Read : CliktCommand(help = "Reads a given zettel") {
     private val identifier by option(
         "-i", "--id",
