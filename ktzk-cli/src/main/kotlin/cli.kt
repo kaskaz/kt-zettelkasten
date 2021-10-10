@@ -3,6 +3,8 @@ import com.github.ajalt.clikt.parameters.options.multiple
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 
+import base.ZettelNotFoundException
+
 class KtzkCli : CliktCommand(name = "ktzk") {
     override fun run() = Unit
 }
@@ -36,5 +38,34 @@ class Create : CliktCommand(help = "Creates a new zettel") {
             .let { 
                 echo("created a new zettel with id ${it.zettel.address.identifier}")
              }
+    }
+}
+
+/**
+ * Reads an existing zettel
+ * 
+ * Receives the address identifier (mandatory) and prints the zettel if exists
+ * 
+ * TODO Opens editor in read only mode or prints text like man (manual) command
+ * TODO Remove try/catch with Promise (https://github.com/Shopify/promise-kotlin)
+ */
+class Read : CliktCommand(help = "Reads a given zettel") {
+    private val identifier by option(
+        "-i", "--id",
+        help = "Zettel's identifier"
+    ).required()
+
+    override fun run() {
+        try {
+            ReadCommand()
+                .execute(ReadCommandInput(identifier))
+                .let { 
+                    echo(
+                        ZettelToStringConverter().convert(it.zettel)
+                    )
+                 }
+        } catch(e: ZettelNotFoundException) {
+            echo(e.message)
+        }
     }
 }

@@ -10,25 +10,6 @@ import com.github.ajalt.clikt.parameters.options.multiple
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 
-class Read : CliktCommand(help = "Reads a given zettel") {
-    private val identifier by option(
-        "-i", "--id",
-        help = "Zettel's identifier"
-    ).required()
-
-    override fun run() {
-        try {
-            identifier.let {
-                Read(FolderRepository)
-                    .execute(address { withIdentifier(it) })
-                    .let { echo("$it") }
-            }
-        } catch(e: ZettelNotFoundException) {
-            echo(e.message)
-        }
-    }
-}
-
 class Update : CliktCommand(help = "Updates a given zettel") {
     private val identifier by option(
         "-i", "--id",
