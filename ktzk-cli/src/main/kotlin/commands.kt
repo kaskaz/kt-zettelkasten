@@ -18,13 +18,7 @@ class Update : CliktCommand(help = "Updates a given zettel") {
 
     override fun run() {
         identifier.let {
-            val zettel = Read(FolderRepository)
-                .execute(address { withIdentifier(it) })
-
-            // update zettel
-
-            Update(FolderRepository)
-                .execute(zettel)
+           
         }
 
     }
